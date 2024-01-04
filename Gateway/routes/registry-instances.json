@@ -1,0 +1,142 @@
+{
+    "services": {
+        "books": {
+            "index": 1,
+            "loadBalanceStrategy": "ROUND_ROBIN",
+            "instances": [
+                {
+                    "API_HU": "books",
+                    "host": "http://localhost",
+                    "port": 3003,
+                    "protocol": "http",
+                    "url": "http://localhost:3003/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3004,
+                    "protocol": "http",
+                    "url": "http://localhost:3004/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3005,
+                    "protocol": "http",
+                    "url": "http://localhost:3005/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3010,
+                    "protocol": "http",
+                    "url": "http://localhost:3010/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3011,
+                    "protocol": "http",
+                    "url": "http://localhost:3011/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3012,
+                    "protocol": "http",
+                    "url": "http://localhost:3012/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3013,
+                    "protocol": "http",
+                    "url": "http://localhost:3013/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3014,
+                    "protocol": "http",
+                    "url": "http://localhost:3014/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3015,
+                    "protocol": "http",
+                    "url": "http://localhost:3015/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3016,
+                    "protocol": "http",
+                    "url": "http://localhost:3016/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3017,
+                    "protocol": "http",
+                    "url": "http://localhost:3017/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3018,
+                    "protocol": "http",
+                    "url": "http://localhost:3018/",
+                    "enabled": false
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3019,
+                    "protocol": "http",
+                    "url": "http://localhost:3019/",
+                    "enabled": true
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3020,
+                    "url": "http://localhost:3020/",
+                    "enabled": true
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3021,
+                    "url": "http://localhost:3021/",
+                    "enabled": true
+                },
+                {
+                    "API_HU": "books",
+                    "host": "localhost",
+                    "port": 3001,
+                    "url": "http://localhost:3001/"
+                }
+            ]
+        }
+    },
+    "auth": {
+        "users": {
+            "ys": {
+                "username": "ys",
+                "password": "password"
+            }
+        }
+    }
+}

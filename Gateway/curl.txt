@@ -1,0 +1,77 @@
+// Add curl tests into here. Necessary for assignment report! Shows understanding
+
+@echo ###### Load Balancer ######
+@echo making curl requests to test the service load balancer strategy:
+curl http://localhost:3000/books/hello
+//response should alternate port number on subsequent curl requests, hence "balancing" the requests between two ports
+
+// 2. Make a curl request to remove instances
+curl -i -X POST http://localhost:3000/enable/books -H "Content-Type: application/json" -d "{\"url\": \"http://localhost:3003/\", \"enabled\": false}"
+
+curl -i -X POST http://localhost:3000/enable/books -H "Content-Type: application/json" -d "{\"url\": \"http://localhost:3019/\", \"enabled\": false}"
+
+// Change the "3019", "3003" etc to point to different instances to remove them
+// Test this by making a new instance by changing the port number in server.js and save, start the server with node server (not nodemon)
+// and check registry.json to see if the new instance has been added.
+// Then run the the curl command above to disable the instance and check in the registry that the added instance has been disabled ("enabled":false)
+
+@echo ###### Services ######
+@echo for enabling a service on port 3020:
+curl -i -X POST http://localhost:3000/enable/books -H "Content-Type: application/json" -d "{\"url\": \"http://localhost:3020/\", \"enabled\": true}" -o enableServices.json
+@echo for disabling a service on port 3020:
+curl -i -X POST http://localhost:3000/enable/books -H "Content-Type: application/json" -d "{\"url\": \"http://localhost:3020/\", \"enabled\": true}" -o disableServices.json
+
+@echo ###### API auth testing ######
+@echo failed curl request testing
+curl http://localhost:3000/books/book -u "ys:cht2520"
+curl http://localhost:3000/books/book -v -H 'Authorization: Basic ys:cht2520'
+curl http://localhost:3000/books/book -H 'Authorization: Basic ys:cht2520'
+curl http://localhost:3000/books/book -H 'Authorization: ys:cht2520'
+curl http://localhost:3000/books/book
+curl http://localhost:3000/books/book -u "ys:cht2520" -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8"
+curl https://localhost:3000/books/book -u ys:cht2520
+curl -u "ys:cht2520" --request GET https://localhost:3000/books/book
+curl -u "ys:cht2520" --request GET http://localhost:3000/books/book
+curl http://localhost:3000/books/book -u "ys:cht2520"
+
+@echo Curl request to authenticate
+curl http://localhost:3000/books/book -u "ys:cht2520" -0 auth1.json
+curl http://localhost:3000/books/book -u "ys" // and commandline will prompt for a cht2520 which will be hidden. -o auth2.json
+
+@echo Testing the authentication with wrong cht2520 and wrong username
+curl http://localhost:3000/books/book -u "ys:passwor" > authwronguser.txt
+curl http://localhost:3000/books/book -u "s:cht2520"
+
+// Week 10 creating testing file
+@echo POST with bad data
+curl -i -X POST http://localhost:3000/unregister -H "Content-Type: application/json" -d "{\"API_HU\"cht2023\",\url\": \"http://localhost:3002/\"}" -o POSTBookBAdData.json
+
+@echo ###### TEST FINISHED ######
+
+type authwronguser.json 
+pause
+type POSTBookBAdData.json
+pause
+type enableServices.json
+pause
+type disableServices.json
+pause
+type auth1.json
+pause
+type auth2.json
+pause
+(repeat for all files)
+....
+@echo off
+
+// Explain the curl as we go along in comments
+
+// Make authenticated curl request to server
+curl http://localhost:3000/books/book -u "ys:cht2520"   
+
+- Finally, we need to test using a POST request. Therefore, remember to open a CMD (on Windows), or BASH (on Mac) and make the following POST request.
+- First, we need to disable the 3002 PORT and then enable the 3001 PORT. 
+
+    curl -i -X POST http://localhost:3000/enable/books -H "Content-Type: application/json" -d "{\"url\": \"http://localhost:3002/\", \"enabled\": false}"
+
+    curl -i -X POST http://localhost:3000/enable/books -H "Content-Type: application/json" -d "{\"url\": \"http://localhost:3001/\", \"enabled\": true}"

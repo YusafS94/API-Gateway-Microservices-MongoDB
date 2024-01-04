@@ -1,0 +1,69 @@
+const express = require("express");
+const app = express();
+const PORT = 3000;
+const helmet = require("helmet");
+const registry = require("./routes/registry.json");
+
+// Adding router folder
+const routes = require("./routes");
+
+const auth = (req, res, next) => {
+	const url = req.protocol + "://" + req.hostname + PORT + req.path;
+
+	// req.headers.authorization outputs the string: Basic c246cGFzc3dvcmQ=
+	// we don't need the "Basic" part, so we need to split it by a space to
+	// get the base64 string at the end.
+	const authorization = req.headers.authorization.split(" ")[1];
+
+	const authString = Buffer.from(authorization, "base64").toString("utf8");
+
+	const authParts = authString.split(":");
+	const username = authParts[0];
+	const password = authParts[1];
+
+	console.log(username + " | " + password);
+
+	// Curl request:
+	// curl http://localhost:3000/books/book -u "sn:password"
+	// Or
+	// curl http://localhost:3000/books/book -u "sn"
+	// and type the password into the commandline when it says to.
+	// Change user and password to match the registry user/password.
+
+	const user = registry.auth.users[username];
+	if (user) {
+		if (user.username === username && user.password === password) {
+			next();
+		} else {
+			res.send({
+				authenticated: false,
+				path: url,
+				message: "Authenticated unsuccessful: Incorrect password.",
+			});
+		}
+	} else {
+		res.send({
+			authenticated: false,
+			path: url,
+			message:
+				"Authenticated unsuccessful: User " +
+				username +
+				" doesn't exist.",
+		});
+	}
+};
+
+app.use(auth);
+
+app.use(express.json());
+app.use("/", routes);
+
+// Use Helmet
+app.use(helmet());
+
+app.listen(PORT, () => {
+	console.log(`My Gateway has started on port ${PORT}`);
+});
+
+// npm run dev - to run the server
+// curl http://localhost:3000/Whatever in powershell (in a separate terminal) to get client response and headers - or curl -i http://localhost:3000/Whatever in CMD.

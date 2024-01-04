@@ -1,0 +1,14 @@
+GET http://localhost:3000/product/reality
+
+###
+
+POST http://localhost:3000/product/reality
+
+###
+
+POST http://localhost:3000/product/reality
+Content-Type: application/json
+{
+    "prod_name": "banana",
+    "prod_price": 0.99
+}

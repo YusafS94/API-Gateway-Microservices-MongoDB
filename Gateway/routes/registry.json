@@ -1,0 +1,1 @@
+{"services":{"books":{"API_HU":"books","host":"localhost","port":3001,"url":"http://localhost:3001/"},"product":{"API_HU":"product","protocol":"http","host":"localhost","port":4001,"url":"http://localhost:4001/"},"undefined":{}}}
